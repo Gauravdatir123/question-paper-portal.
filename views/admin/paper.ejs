@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Admin - Manage Question Papers</title>
+</head>
+<body>
+
+<h2>Admin – Manage Question Papers</h2>
+
+<table border="1" cellpadding="10">
+  <tr>
+    <th>University</th>
+    <th>Course</th>
+    <th>Semester</th>
+    <th>Subject</th>
+    <th>Year</th>
+    <th>Download</th>
+    <th>Delete</th>
+  </tr>
+
+  <% papers.forEach(paper => { %>
+    <tr>
+      <td><%= paper.university %></td>
+      <td><%= paper.course %></td>
+      <td><%= paper.semester %></td>
+      <td><%= paper.subject %></td>
+      <td><%= paper.year %></td>
+      <td>
+        <a href="/download/<%= paper._id %>">Download</a>
+      </td>
+      <td>
+        <form action="/admin/delete/<%= paper._id %>" method="POST"
+              onsubmit="return confirm('Are you sure you want to delete this paper?');">
+          <button type="submit">Delete</button>
+        </form>
+      </td>
+    </tr>
+  <% }) %>
+
+</table>
+
+</body>
+</html>

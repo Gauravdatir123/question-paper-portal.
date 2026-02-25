@@ -1,0 +1,146 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  background: linear-gradient(120deg, #eef2ff, #f8fafc);
+  padding: 40px;
+}
+
+/* CONTAINER */
+.container {
+  background: #ffffff;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+  max-width: 1100px;
+  margin: auto;
+}
+
+.container.small {
+  max-width: 500px;
+}
+
+/* HEADINGS */
+h2 {
+  text-align: center;
+  margin-bottom: 25px;
+  color: #1f2937;
+}
+
+/* SEARCH FORM */
+.search-form,
+.upload-form {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  justify-content: center;
+  margin-bottom: 25px;
+}
+
+.search-form input,
+.search-form select,
+.upload-form input,
+.upload-form select {
+  padding: 10px 12px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+  min-width: 150px;
+}
+
+/* BUTTONS */
+button {
+  padding: 10px 18px;
+  border: none;
+  background: #4f46e5;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  background: #4338ca;
+}
+
+/* TABLE */
+.table-wrapper {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+thead {
+  background: #4f46e5;
+  color: white;
+}
+
+th, td {
+  padding: 14px;
+  text-align: center;
+}
+
+tbody tr {
+  border-bottom: 1px solid #e5e7eb;
+}
+
+tbody tr:hover {
+  background: #eef2ff;
+}
+
+/* LINKS */
+.download-btn {
+  color: #2563eb;
+  font-weight: 500;
+  text-decoration: none;
+}
+
+.download-btn:hover {
+  text-decoration: underline;
+}
+
+/* DELETE */
+.delete-btn {
+  background: #dc2626;
+}
+
+.delete-btn:hover {
+  background: #b91c1c;
+}
+
+/* EMPTY */
+.empty {
+  padding: 25px;
+  color: #6b7280;
+}
+/* ================= SPPU UNIVERSITY BRANDING ================= */
+
+.uni-header {
+  background: linear-gradient(135deg, #1e3a8a, #2563eb);
+  color: #ffffff;
+  padding: 24px;
+  border-radius: 12px;
+  text-align: center;
+  margin-bottom: 25px;
+  box-shadow: 0 10px 20px rgba(0,0,0,0.12);
+}
+
+.uni-header h1 {
+  font-size: 26px;
+  font-weight: 600;
+  margin-bottom: 6px;
+}
+
+.uni-header p {
+  font-size: 14px;
+  opacity: 0.95;
+  line-height: 1.4;
+}
