@@ -1,7 +1,8 @@
+require("dotenv").config(); // MUST be first
+
 const express = require("express");
 const mongoose = require("mongoose");
 const path = require("path");
-require("dotenv").config(); // ✅ LOAD ENV
 
 const app = express();
 
@@ -17,14 +18,20 @@ app.set("views", path.join(__dirname, "views"));
 app.use("/", require("./routes/paperRoutes"));
 app.use("/admin", require("./routes/adminRoutes"));
 
-/* ================= MONGODB ================= */
-mongoose
-  .connect(process.env.MONGO_URI)
-  .then(() => console.log("✅ MongoDB Connected"))
-  .catch(err => console.error("❌ MongoDB Error:", err));
-
-/* ================= SERVER ================= */
+/* ================= MONGODB + SERVER ================= */
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`🚀 Server running on port ${PORT}`);
+
+mongoose.connect(process.env.MONGO_URI, {
+  serverSelectionTimeoutMS: 10000,
+})
+.then(() => {
+  console.log("✅ MongoDB Connected");
+
+  app.listen(PORT, () => {
+    console.log(`🚀 Server running on port ${PORT}`);
+  });
+})
+.catch(err => {
+  console.error("❌ MongoDB connection failed");
+  console.error(err);
 });

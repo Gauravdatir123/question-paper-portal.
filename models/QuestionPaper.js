@@ -9,7 +9,7 @@ const questionPaperSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  branch: {                 // 👈 ADD THIS
+  branch: {
     type: String,
     required: true
   },
@@ -25,7 +25,7 @@ const questionPaperSchema = new mongoose.Schema({
     type: Number,
     required: true
   },
-  pdf: {
+  pdfUrl: {                // ✅ Cloudinary URL
     type: String,
     required: true
   }

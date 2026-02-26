@@ -1,64 +1,68 @@
 const express = require("express");
-const multer = require("multer");
-const path = require("path");
-const fs = require("fs");
-const QuestionPaper = require("../models/QuestionPaper");
-
 const router = express.Router();
+const streamifier = require("streamifier");
 
-/* ========= MULTER ========= */
-const storage = multer.diskStorage({
-  destination: "uploads/",
-  filename: (req, file, cb) => {
-    cb(null, Date.now() + path.extname(file.originalname));
-  }
-});
-const upload = multer({ storage });
+const QuestionPaper = require("../models/QuestionPaper");
+const upload = require("../middleware/upload"); // memory storage
+const cloudinary = require("../config/cloudinary");
 
-/* ========= ROUTES ========= */
-
-// UPLOAD PAGE
+/* ========= UPLOAD PAGE ========= */
 router.get("/upload", (req, res) => {
   res.render("admin/upload");
 });
 
-// HANDLE UPLOAD
+/* ========= HANDLE UPLOAD ========= */
 router.post("/upload", upload.single("pdf"), async (req, res) => {
-  const paper = new QuestionPaper({
-    university: req.body.university,
-    course: req.body.course,
-    branch: req.body.branch,
-    semester: Number(req.body.semester),
-    subject: req.body.subject,
-    year: Number(req.body.year),
-    pdf: req.file.filename
-  });
+  try {
+    if (!req.file) {
+      return res.status(400).send("No file uploaded");
+    }
 
-  await paper.save();
-  res.redirect("/admin/papers");
+    // Upload PDF to Cloudinary
+    const result = await new Promise((resolve, reject) => {
+      const stream = cloudinary.uploader.upload_stream(
+        { resource_type: "raw" }, // REQUIRED for PDFs
+        (error, result) => {
+          if (error) reject(error);
+          else resolve(result);
+        }
+      );
+
+      streamifier.createReadStream(req.file.buffer).pipe(stream);
+    });
+
+    // Save ONLY Cloudinary URL in MongoDB
+    await QuestionPaper.create({
+      university: req.body.university,
+      course: req.body.course,
+      branch: req.body.branch,
+      semester: Number(req.body.semester),
+      subject: req.body.subject,
+      year: Number(req.body.year),
+      pdfUrl: result.secure_url, // ✅ CLOUDINARY URL
+    });
+
+    res.redirect("/admin/papers");
+  } catch (err) {
+    console.error(err);
+    res.status(500).send("Upload failed");
+  }
 });
 
-// ADMIN DASHBOARD (DELETE VISIBLE)
+/* ========= ADMIN DASHBOARD ========= */
 router.get("/papers", async (req, res) => {
   const papers = await QuestionPaper.find().sort({ year: -1 });
 
   res.render("home", {
-  papers,
-  isAdmin: true,
-  filters: {}   // ⭐ ADD THIS LINE
-});
+    papers,
+    isAdmin: true,
+    filters: {}
+  });
 });
 
-// DELETE
+/* ========= DELETE ========= */
 router.post("/delete/:id", async (req, res) => {
-  const paper = await QuestionPaper.findById(req.params.id);
-
-  if (paper) {
-    const filePath = path.join(__dirname, "..", "uploads", paper.pdf);
-    if (fs.existsSync(filePath)) fs.unlinkSync(filePath);
-    await QuestionPaper.findByIdAndDelete(req.params.id);
-  }
-
+  await QuestionPaper.findByIdAndDelete(req.params.id);
   res.redirect("/admin/papers");
 });
 
