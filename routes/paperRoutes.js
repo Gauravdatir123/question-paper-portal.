@@ -43,7 +43,13 @@ router.get("/", async (req, res) => {
 // DOWNLOAD
 router.get("/download/:id", async (req, res) => {
   const paper = await QuestionPaper.findById(req.params.id);
-  res.download("uploads/" + paper.pdf);
+
+  if (!paper || !paper.pdfUrl) {
+    return res.status(404).send("File not found");
+  }
+
+  // Redirect to Cloudinary PDF
+  res.redirect(paper.pdfUrl);
 });
 
 module.exports = router;
