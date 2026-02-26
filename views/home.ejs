@@ -9,29 +9,29 @@
 <body>
 
 <div class="container">
- <div class="uni-header">
-  <h1>Savitribai Phule Pune University</h1>
-  <p>
-    Previous Year Question Paper Portal<br>
-    Faculty of Engineering
-  </p>
-</div>
-  <h2>Previous Year Question Papers</h2>
+  <div class="uni-header">
+    <h1>Savitribai Phule Pune University</h1>
+    <p>
+      Previous Year Question Paper Portal<br>
+      Faculty of Engineering
+    </p>
+  </div>
 
+  <h2>Previous Year Question Papers</h2>
 
   <!-- SEARCH FORM -->
   <form method="GET" action="/" class="search-form">
 
     <!-- Branch -->
     <select name="branch" id="branch" required>
-  <option value="">Branch</option>
-  <option value="IT" <%= filters?.branch === "IT" ? "selected" : "" %>>IT</option>
-  <option value="CS" <%= filters?.branch === "CS" ? "selected" : "" %>>Computer Science</option>
-  <option value="ENTC" <%= filters?.branch === "ENTC" ? "selected" : "" %>>ENTC</option>
-  <option value="Mechanical" <%= filters?.branch === "Mechanical" ? "selected" : "" %>>Mechanical</option>
-</select>
+      <option value="">Branch</option>
+      <option value="IT" <%= filters?.branch === "IT" ? "selected" : "" %>>IT</option>
+      <option value="CS" <%= filters?.branch === "CS" ? "selected" : "" %>>Computer Science</option>
+      <option value="ENTC" <%= filters?.branch === "ENTC" ? "selected" : "" %>>ENTC</option>
+      <option value="Mechanical" <%= filters?.branch === "Mechanical" ? "selected" : "" %>>Mechanical</option>
+    </select>
 
-    <!-- Academic Year (UI only, not filtering now) -->
+    <!-- Academic Year -->
     <select name="academicYear">
       <option value="">Year</option>
       <option value="FE" <%= filters?.academicYear === "FE" ? "selected" : "" %>>FE</option>
@@ -76,7 +76,7 @@
       <tbody>
         <% if (papers.length === 0) { %>
           <tr>
-            <td colspan="<%= isAdmin ? 7 : 6 %>" class="empty">
+            <td colspan="<%= (typeof isAdmin !== 'undefined' && isAdmin) ? 7 : 6 %>" class="empty">
               No papers found
             </td>
           </tr>
@@ -84,21 +84,19 @@
 
         <% papers.forEach(paper => { %>
           <tr>
-            <td data-label="Course"><%= paper.course %></td>
-<td data-label="Branch"><%= paper.branch %></td>
-<td data-label="Semester"><%= paper.semester %></td>
-<td data-label="Subject"><%= paper.subject %></td>
-<td data-label="Year"><%= paper.year %></td>
-<td data-label="Download">
-  <a href="/download/<%= paper._id %>" class="download-btn">Download</a>
-</td>
+            <td><%= paper.course %></td>
+            <td><%= paper.branch %></td>
+            <td><%= paper.semester %></td>
+            <td><%= paper.subject %></td>
+            <td><%= paper.year %></td>
+            <td>
               <a href="/download/<%= paper._id %>" class="download-btn">Download</a>
             </td>
 
             <% if (typeof isAdmin !== "undefined" && isAdmin) { %>
               <td>
                 <form action="/admin/delete/<%= paper._id %>" method="POST">
-                  <button class="delete-btn">Delete</button>
+                  <button type="submit" class="delete-btn">Delete</button>
                 </form>
               </td>
             <% } %>
@@ -107,10 +105,9 @@
       </tbody>
     </table>
   </div>
-
 </div>
 
-<!-- ================= SUBJECT SCRIPT (FIXED) ================= -->
+<!-- SUBJECT SCRIPT -->
 <script>
   const branchSubjects = {
     IT: [
@@ -128,12 +125,12 @@
       "Machine Learning"
     ],
     ENTC: [
-    "CELLULAR NETWORKS (CN)",
-    "PROJECT MANAGEMENT (PM)",
-    "POWER DEVICES AND CIRCUITS (PD & C)",
-    "EMBEDDED PROCESSORS (EP)",
-    "NETWORK SECURITY (NS)"
-  ],
+      "CELLULAR NETWORKS (CN)",
+      "PROJECT MANAGEMENT (PM)",
+      "POWER DEVICES AND CIRCUITS (PD & C)",
+      "EMBEDDED PROCESSORS (EP)",
+      "NETWORK SECURITY (NS)"
+    ],
     Mechanical: [
       "Thermodynamics",
       "Fluid Mechanics",
@@ -144,38 +141,27 @@
 
   const branchSelect = document.getElementById("branch");
   const subjectSelect = document.getElementById("subject");
-
-  // value coming from backend
   const selectedSubject = "<%= filters?.subject || "" %>";
 
   function loadSubjects(branch) {
     subjectSelect.innerHTML = '<option value="">Subject</option>';
-
     if (!branchSubjects[branch]) return;
 
     branchSubjects[branch].forEach(sub => {
       const opt = document.createElement("option");
       opt.value = sub;
       opt.textContent = sub;
-
-      // ✅ restore selected subject after search
-      if (
-        selectedSubject &&
-        sub.toLowerCase() === selectedSubject.toLowerCase()
-      ) {
+      if (selectedSubject && sub.toLowerCase() === selectedSubject.toLowerCase()) {
         opt.selected = true;
       }
-
       subjectSelect.appendChild(opt);
     });
   }
 
-  // On branch change
   branchSelect.addEventListener("change", () => {
     loadSubjects(branchSelect.value);
   });
 
-  // ✅ On page reload (after search)
   if (branchSelect.value) {
     loadSubjects(branchSelect.value);
   }
