@@ -83,12 +83,14 @@
 
         <% papers.forEach(paper => { %>
           <tr>
-            <td><%= paper.course %></td>
-            <td><%= paper.branch %></td>
-            <td><%= paper.semester %></td>
-            <td><%= paper.subject %></td>
-            <td><%= paper.year %></td>
-            <td>
+            <td data-label="Course"><%= paper.course %></td>
+<td data-label="Branch"><%= paper.branch %></td>
+<td data-label="Semester"><%= paper.semester %></td>
+<td data-label="Subject"><%= paper.subject %></td>
+<td data-label="Year"><%= paper.year %></td>
+<td data-label="Download">
+  <a href="/download/<%= paper._id %>" class="download-btn">Download</a>
+</td>
               <a href="/download/<%= paper._id %>" class="download-btn">Download</a>
             </td>
 

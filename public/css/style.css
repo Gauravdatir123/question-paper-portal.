@@ -253,3 +253,49 @@ h1, h2 {
 .container.small {
   max-width: 500px;
 }
+/* ================= MOBILE CARD VIEW ================= */
+@media (max-width: 768px) {
+
+  table, thead, tbody, th, tr {
+    display: block;
+  }
+
+  thead {
+    display: none; /* hide table header on mobile */
+  }
+
+  table {
+    min-width: 100%;
+  }
+
+  tr {
+    background: #ffffff;
+    margin-bottom: 16px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+    padding: 12px;
+  }
+
+  td {
+    display: flex;
+    justify-content: space-between;
+    padding: 8px 6px;
+    border: none;
+    font-size: 14px;
+  }
+
+  td::before {
+    content: attr(data-label);
+    font-weight: bold;
+    color: #555;
+  }
+
+  .download-btn {
+    width: 100%;
+    text-align: center;
+    padding: 8px;
+  }
+}
+.table-wrapper {
+  overflow-x: auto;
+}
