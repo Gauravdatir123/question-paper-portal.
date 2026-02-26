@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
 
+/* ========== RESET ========== */
 * {
   margin: 0;
   padding: 0;
@@ -9,13 +10,13 @@
 
 body {
   background: linear-gradient(120deg, #eef2ff, #f8fafc);
-  padding: 40px;
+  padding: 20px;
 }
 
-/* CONTAINER */
+/* ========== CONTAINER ========== */
 .container {
   background: #ffffff;
-  padding: 30px;
+  padding: 24px;
   border-radius: 12px;
   box-shadow: 0 15px 30px rgba(0,0,0,0.1);
   max-width: 1100px;
@@ -26,40 +27,60 @@ body {
   max-width: 500px;
 }
 
-/* HEADINGS */
-h2 {
+/* ========== HEADER ========== */
+.uni-header {
+  background: linear-gradient(135deg, #1e3a8a, #2563eb);
+  color: #ffffff;
+  padding: 24px;
+  border-radius: 12px;
   text-align: center;
   margin-bottom: 25px;
+}
+
+.uni-header h1 {
+  font-size: 26px;
+  font-weight: 600;
+}
+
+.uni-header p {
+  font-size: 14px;
+  margin-top: 6px;
+}
+
+/* ========== HEADINGS ========== */
+h2 {
+  text-align: center;
+  margin: 20px 0;
   color: #1f2937;
 }
 
-/* SEARCH FORM */
+/* ========== SEARCH / UPLOAD FORM ========== */
 .search-form,
 .upload-form {
   display: flex;
-  gap: 12px;
   flex-wrap: wrap;
-  justify-content: center;
+  gap: 12px;
   margin-bottom: 25px;
 }
 
-.search-form input,
 .search-form select,
+.search-form button,
 .upload-form input,
-.upload-form select {
-  padding: 10px 12px;
+.upload-form select,
+.upload-form button {
+  flex: 1 1 200px;
+  height: 44px;
+  padding: 8px 12px;
   border-radius: 8px;
   border: 1px solid #d1d5db;
-  min-width: 150px;
+  font-size: 14px;
 }
 
-/* BUTTONS */
+/* ========== BUTTONS ========== */
 button {
-  padding: 10px 18px;
-  border: none;
   background: #4f46e5;
   color: white;
-  border-radius: 8px;
+  border: none;
   cursor: pointer;
   transition: 0.3s;
 }
@@ -68,7 +89,15 @@ button:hover {
   background: #4338ca;
 }
 
-/* TABLE */
+.delete-btn {
+  background: #dc2626;
+}
+
+.delete-btn:hover {
+  background: #b91c1c;
+}
+
+/* ========== TABLE ========== */
 .table-wrapper {
   overflow-x: auto;
 }
@@ -84,7 +113,7 @@ thead {
 }
 
 th, td {
-  padding: 14px;
+  padding: 12px;
   text-align: center;
 }
 
@@ -96,7 +125,7 @@ tbody tr:hover {
   background: #eef2ff;
 }
 
-/* LINKS */
+/* ========== LINKS ========== */
 .download-btn {
   color: #2563eb;
   font-weight: 500;
@@ -107,117 +136,22 @@ tbody tr:hover {
   text-decoration: underline;
 }
 
-/* DELETE */
-.delete-btn {
-  background: #dc2626;
-}
-
-.delete-btn:hover {
-  background: #b91c1c;
-}
-
-/* EMPTY */
+/* ========== EMPTY STATE ========== */
 .empty {
   padding: 25px;
   color: #6b7280;
-}
-/* ================= SPPU UNIVERSITY BRANDING ================= */
-
-.uni-header {
-  background: linear-gradient(135deg, #1e3a8a, #2563eb);
-  color: #ffffff;
-  padding: 24px;
-  border-radius: 12px;
-  text-align: center;
-  margin-bottom: 25px;
-  box-shadow: 0 10px 20px rgba(0,0,0,0.12);
-}
-
-.uni-header h1 {
-  font-size: 26px;
-  font-weight: 600;
-  margin-bottom: 6px;
-}
-
-.uni-header p {
-  font-size: 14px;
-  opacity: 0.95;
-  line-height: 1.4;
-}
-/* ================= GLOBAL ================= */
-* {
-  box-sizing: border-box;
-}
-
-body {
-  margin: 0;
-  padding: 0;
-  font-family: Arial, sans-serif;
-}
-
-/* ================= CONTAINER ================= */
-.container {
-  max-width: 1200px;
-  margin: auto;
-  padding: 16px;
-}
-
-/* ================= FORMS ================= */
-.search-form,
-.upload-form {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 10px;
-}
-
-.search-form select,
-.search-form button,
-.upload-form input,
-.upload-form select,
-.upload-form button {
-  flex: 1 1 200px;
-  padding: 10px;
-  font-size: 14px;
-}
-
-/* ================= TABLE ================= */
-.table-wrapper {
-  width: 100%;
-  overflow-x: auto; /* 👈 key for mobile */
-}
-
-table {
-  width: 100%;
-  border-collapse: collapse;
-  min-width: 600px;
-}
-
-th, td {
-  padding: 10px;
-  text-align: left;
-  border: 1px solid #ddd;
-}
-
-.download-btn,
-.delete-btn {
-  padding: 6px 10px;
-  font-size: 13px;
-}
-
-/* ================= HEADINGS ================= */
-h1, h2 {
   text-align: center;
 }
-/* ================= MOBILE RESPONSIVE ================= */
+
+/* ========================================================= */
+/* ================= MOBILE RESPONSIVE ===================== */
+/* ========================================================= */
+
 @media (max-width: 768px) {
 
   /* Header */
   .uni-header h1 {
     font-size: 20px;
-  }
-
-  .uni-header p {
-    font-size: 14px;
   }
 
   /* Forms stack vertically */
@@ -227,107 +161,47 @@ h1, h2 {
   }
 
   .search-form select,
-  .search-form button,
-  .upload-form input,
-  .upload-form select,
-  .upload-form button {
+  .search-form button {
     width: 100%;
+    height: 44px;
   }
 
-  /* Table text smaller */
-  table {
-    font-size: 13px;
-  }
-
-  th, td {
-    padding: 8px;
-  }
-
-  /* Buttons */
-  .download-btn,
-  .delete-btn {
-    width: 100%;
-    text-align: center;
-  }
-}
-.container.small {
-  max-width: 500px;
-}
-/* ================= MOBILE CARD VIEW ================= */
-@media (max-width: 768px) {
-
-  table, thead, tbody, th, tr {
+  /* ===== TABLE → CARD VIEW ===== */
+  table, thead, tbody, tr {
     display: block;
+    width: 100%;
   }
 
   thead {
-    display: none; /* hide table header on mobile */
-  }
-
-  table {
-    min-width: 100%;
+    display: none;
   }
 
   tr {
-    background: #ffffff;
+    background: #fff;
     margin-bottom: 16px;
     border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
     padding: 12px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
   }
 
   td {
     display: flex;
     justify-content: space-between;
-    padding: 8px 6px;
+    padding: 6px 0;
     border: none;
     font-size: 14px;
   }
 
   td::before {
     content: attr(data-label);
-    font-weight: bold;
-    color: #555;
+    font-weight: 600;
+    color: #374151;
   }
 
-  .download-btn {
+  .download-btn,
+  .delete-btn {
     width: 100%;
     text-align: center;
-    padding: 8px;
-  }
-}
-.table-wrapper {
-  overflow-x: auto;
-}
-/* ===== FORCE REAL MOBILE PHONES ===== */
-@media only screen and (max-device-width: 768px) {
-
-  table, thead, tbody, tr, th {
-    display: block !important;
-    width: 100% !important;
-  }
-
-  thead {
-    display: none !important;
-  }
-
-  tr {
-    margin-bottom: 16px;
-    background: #fff;
-    border-radius: 10px;
-    padding: 12px;
-    box-shadow: 0 4px 8px rgba(0,0,0,0.08);
-  }
-
-  td {
-    display: flex !important;
-    justify-content: space-between;
-    padding: 6px 0;
-    border: none !important;
-  }
-
-  td::before {
-    content: attr(data-label);
-    font-weight: bold;
+    margin-top: 8px;
   }
 }
