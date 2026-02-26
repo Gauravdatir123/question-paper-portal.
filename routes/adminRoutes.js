@@ -33,14 +33,16 @@ router.post("/upload", upload.single("pdf"), async (req, res) => {
 
     // Save ONLY Cloudinary URL in MongoDB
     await QuestionPaper.create({
-      university: req.body.university,
-      course: req.body.course,
-      branch: req.body.branch,
-      semester: Number(req.body.semester),
-      subject: req.body.subject,
-      year: Number(req.body.year),
-      pdfUrl: result.secure_url, // ✅ CLOUDINARY URL
-    });
+  university: req.body.university,
+  course: req.body.course,
+  branch: req.body.branch,
+  semester: Number(req.body.semester),
+  subject: req.body.subject,
+  year: Number(req.body.year),
+
+  pdfUrl: result.secure_url,
+  filename: req.file.originalname   // ✅ THIS MATCHES YOUR MODEL
+});
 
     res.redirect("/admin/papers");
   } catch (err) {

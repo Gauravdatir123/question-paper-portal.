@@ -28,6 +28,10 @@ const questionPaperSchema = new mongoose.Schema({
   pdfUrl: {                // ✅ Cloudinary URL
     type: String,
     required: true
+  },
+  filename: {
+  type: String,
+  required: true
   }
 });
 
