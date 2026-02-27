@@ -608,3 +608,46 @@ body {
     #4f46e5
   );
 }
+/* ===== TITLE + DOWNLOAD NOTES (IMPROVED) ===== */
+.page-title-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 24px 0;
+  padding-right: 80px;   /* brings button inward from edge */
+}
+
+/* Bigger & better button */
+.note-btn.heading-btn {
+  padding: 10px 22px;        /* bigger */
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 12px;
+
+  background: linear-gradient(135deg, #4f46e5, #6366f1);
+  color: #ffffff;
+  text-decoration: none;
+
+  box-shadow: 0 10px 22px rgba(79,70,229,0.35);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+/* Hover polish */
+.note-btn.heading-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 14px 28px rgba(79,70,229,0.45);
+}
+
+/* Mobile behavior */
+@media (max-width: 768px) {
+  .page-title-row {
+    flex-direction: column;
+    align-items: flex-start;
+    padding-right: 0;
+    gap: 12px;
+  }
+
+  .note-btn.heading-btn {
+    align-self: flex-start;
+  }
+}

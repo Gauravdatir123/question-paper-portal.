@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Subject-wise Notes</title>
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="icon" type="image/png" href="/logo.png">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+
+<body>
+
+<!-- ===== TOP NAVBAR (same as home) ===== -->
+<nav class="top-navbar">
+  <div class="nav-left">
+    <img src="/logo.png" alt="SPPU Logo" class="nav-logo-img">
+    <div class="nav-text">
+      <span class="nav-title">SPPU</span>
+      <span class="nav-subtitle">Study Material</span>
+    </div>
+  </div>
+
+  <div class="nav-center">
+    <a href="/">Home</a>
+    <a href="/papers">Question Papers</a>
+    <a href="/notes" class="active">Notes</a>
+    <a href="/about">About</a>
+    <a href="/contact">Contact</a>
+  </div>
+
+  <div class="nav-right">
+    <a href="/admin" class="nav-btn">Admin</a>
+  </div>
+</nav>
+
+<!-- ===== MAIN CONTAINER ===== -->
+<div class="container">
+
+  <!-- HEADER -->
+  <div class="uni-header">
+    <h1>Subject-wise Notes</h1>
+    <p>
+      Select Branch, Year, Semester and Subject to download notes
+    </p>
+  </div>
+
+  <!-- PAGE TITLE -->
+  <h2>Download Subject-wise Notes</h2>
+
+  <!-- ===== NOTES FILTER FORM ===== -->
+  <form method="GET" action="/notes" class="search-form">
+
+    <!-- Branch -->
+    <select name="branch" id="branch" required>
+      <option value="">Branch</option>
+      <option value="IT">IT</option>
+      <option value="CS">Computer Science</option>
+      <option value="ENTC">ENTC</option>
+      <option value="Mechanical">Mechanical</option>
+    </select>
+
+    <!-- Year -->
+    <select name="academicYear" required>
+      <option value="">Year</option>
+      <option value="FE">FE</option>
+      <option value="SE">SE</option>
+      <option value="TE">TE</option>
+      <option value="BE">BE</option>
+    </select>
+
+    <!-- Semester -->
+    <select name="semester" required>
+      <option value="">Semester</option>
+      <option value="1">Semester 1</option>
+      <option value="2">Semester 2</option>
+    </select>
+
+    <!-- Subject -->
+    <select name="subject" id="subject" required>
+      <option value="">Subject</option>
+    </select>
+
+    <button type="submit">Search Notes</button>
+  </form>
+
+  <!-- ===== NOTES RESULT ===== -->
+  <div class="table-wrapper">
+    <table>
+      <thead>
+        <tr>
+          <th>Branch</th>
+          <th>Semester</th>
+          <th>Subject</th>
+          <th>Download</th>
+        </tr>
+      </thead>
+
+      <tbody>
+        <% if (!notes || notes.length === 0) { %>
+          <tr>
+            <td colspan="4" class="empty">
+              No notes found
+            </td>
+          </tr>
+        <% } %>
+
+        <% notes && notes.forEach(note => { %>
+          <tr>
+            <td><%= note.branch %></td>
+            <td><%= note.semester %></td>
+            <td><%= note.subject %></td>
+            <td>
+              <a href="/notes/download/<%= note._id %>" class="download-btn">
+                Download
+              </a>
+            </td>
+          </tr>
+        <% }) %>
+      </tbody>
+    </table>
+  </div>
+
+</div>
+
+<!-- ===== SUBJECT SCRIPT ===== -->
+<script>
+const branchSubjects = {
+  IT: [
+    "Computer and Network Security",
+    "Data Science and Big Data Analytics",
+    "Web Application Development",
+    "Cloud Computing",
+    "Artificial Intelligence"
+  ],
+  CS: [
+    "DATA SCIENCE AND BIG DATA ANALYSIS",
+    "WEB TECHNOLOGY",
+    "ARTIFICIAL INTELLIGENCE",
+    "CLOUD COMPUTING",
+    "Machine Learning"
+  ],
+  ENTC: [
+    "CELLULAR NETWORKS (CN)",
+    "PROJECT MANAGEMENT (PM)",
+    "POWER DEVICES AND CIRCUITS (PD & C)",
+    "EMBEDDED PROCESSORS (EP)",
+    "NETWORK SECURITY (NS)"
+  ],
+  Mechanical: [
+    "Thermodynamics",
+    "Fluid Mechanics",
+    "Machine Design",
+    "Heat Transfer"
+  ]
+};
+
+const branchSelect = document.getElementById("branch");
+const subjectSelect = document.getElementById("subject");
+
+branchSelect.addEventListener("change", () => {
+  subjectSelect.innerHTML = '<option value="">Subject</option>';
+
+  const subjects = branchSubjects[branchSelect.value];
+  if (!subjects) return;
+
+  subjects.forEach(sub => {
+    const opt = document.createElement("option");
+    opt.value = sub;
+    opt.textContent = sub;
+    subjectSelect.appendChild(opt);
+  });
+});
+</script>
+
+</body>
+</html>

@@ -15,9 +15,17 @@ app.use(express.static(path.join(__dirname, "public")));
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
-/* ================= ROUTES ================= */
-app.use("/", require("./routes/paperRoutes"));
+/* ================= NOTES ROUTE (FIX) ================= */
+app.get("/notes", (req, res) => {
+  res.render("notes", {
+    notes: [],
+    filters: {}
+  });
+});
+
+/* ================= OTHER ROUTES ================= */
 app.use("/admin", require("./routes/adminRoutes"));
+app.use("/", require("./routes/paperRoutes"));
 
 /* ================= MONGODB + SERVER ================= */
 const PORT = process.env.PORT || 3000;
