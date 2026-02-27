@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600&display=swap');
 
-/* ========== RESET ========== */
+/* RESET */
 * {
   margin: 0;
   padding: 0;
@@ -9,54 +9,44 @@
 }
 
 body {
-  background: linear-gradient(120deg, #eef2ff, #f8fafc);
+  background: radial-gradient(circle at top, #eef2ff 0%, #f8fafc 45%, #f1f5f9 100%);
   padding: 20px;
 }
 
-/* ========== CONTAINER ========== */
+/* CONTAINER */
 .container {
-  background: #ffffff;
-  padding: 24px;
-  border-radius: 12px;
-  box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+  background: linear-gradient(180deg, #ffffff 0%, #f9fafb 100%);
+  padding: 26px;
+  border-radius: 16px;
+  box-shadow:
+    0 10px 25px rgba(0,0,0,0.08),
+    0 2px 8px rgba(0,0,0,0.04);
   max-width: 1100px;
   margin: auto;
 }
 
-.container.small {
-  max-width: 500px;
-}
-
-/* ========== HEADER ========== */
+/* HEADER */
 .uni-header {
-  background: linear-gradient(135deg, #1e3a8a, #2563eb);
-  color: #ffffff;
-  padding: 24px;
-  border-radius: 12px;
+  background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 60%, #3b82f6 100%);
+  color: #fff;
+  padding: 28px;
+  border-radius: 16px;
   text-align: center;
-  margin-bottom: 25px;
+  margin-bottom: 30px;
+  box-shadow: 0 12px 25px rgba(37,99,235,0.35);
 }
-
 .uni-header h1 {
-  font-size: 26px;
-  font-weight: 600;
+  font-size: 28px;
+  letter-spacing: 0.3px;
 }
 
 .uni-header p {
   font-size: 14px;
-  margin-top: 6px;
+  opacity: 0.9;
 }
 
-/* ========== HEADINGS ========== */
-h2 {
-  text-align: center;
-  margin: 20px 0;
-  color: #1f2937;
-}
-
-/* ========== SEARCH / UPLOAD FORM ========== */
-.search-form,
-.upload-form {
+/* FORM */
+.search-form {
   display: flex;
   flex-wrap: wrap;
   gap: 12px;
@@ -64,10 +54,7 @@ h2 {
 }
 
 .search-form select,
-.search-form button,
-.upload-form input,
-.upload-form select,
-.upload-form button {
+.search-form button {
   flex: 1 1 200px;
   height: 44px;
   padding: 8px 12px;
@@ -76,28 +63,19 @@ h2 {
   font-size: 14px;
 }
 
-/* ========== BUTTONS ========== */
+/* BUTTONS */
 button {
   background: #4f46e5;
   color: white;
   border: none;
   cursor: pointer;
-  transition: 0.3s;
-}
-
-button:hover {
-  background: #4338ca;
 }
 
 .delete-btn {
   background: #dc2626;
 }
 
-.delete-btn:hover {
-  background: #b91c1c;
-}
-
-/* ========== TABLE ========== */
+/* TABLE */
 .table-wrapper {
   overflow-x: auto;
 }
@@ -125,48 +103,50 @@ tbody tr:hover {
   background: #eef2ff;
 }
 
-/* ========== LINKS ========== */
 .download-btn {
   color: #2563eb;
-  font-weight: 500;
   text-decoration: none;
+  font-weight: 500;
 }
 
-.download-btn:hover {
-  text-decoration: underline;
-}
-
-/* ========== EMPTY STATE ========== */
 .empty {
   padding: 25px;
-  color: #6b7280;
   text-align: center;
+  color: #6b7280;
 }
 
-/* ========================================================= */
-/* ================= MOBILE RESPONSIVE ===================== */
-/* ========================================================= */
-
+/* ================= MOBILE VIEW ================= */
 @media (max-width: 768px) {
 
-  /* Header */
-  .uni-header h1 {
-    font-size: 20px;
+  body {
+    padding: 10px;
   }
 
-  /* Forms stack vertically */
-  .search-form,
-  .upload-form {
+  /* ---------- FORM FIX ---------- */
+  .search-form {
     flex-direction: column;
+    gap: 12px;
   }
 
   .search-form select,
   .search-form button {
-    width: 100%;
-    height: 44px;
+    height: 44px !important;
+    min-height: 44px;
+    max-height: 44px;
+    padding: 6px 12px !important;
+    font-size: 14px;
+    line-height: 1.2;
+    border-radius: 8px;
   }
 
-  /* ===== TABLE → CARD VIEW ===== */
+  select {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-color: #fff;
+  }
+
+  /* ---------- TABLE → CARD ---------- */
   table, thead, tbody, tr {
     display: block;
     width: 100%;
@@ -178,9 +158,9 @@ tbody tr:hover {
 
   tr {
     background: #fff;
-    margin-bottom: 16px;
+    margin-bottom: 14px;
     border-radius: 10px;
-    padding: 12px;
+    padding: 14px;
     box-shadow: 0 4px 10px rgba(0,0,0,0.08);
   }
 
@@ -198,10 +178,158 @@ tbody tr:hover {
     color: #374151;
   }
 
-  .download-btn,
-  .delete-btn {
-    width: 100%;
-    text-align: center;
-    margin-top: 8px;
+  /* HIDE NON-IMPORTANT FIELDS */
+  .col-course,
+  .col-semester,
+  .col-year {
+    display: none !important;
   }
+
+  /* SUBJECT HIGHLIGHT */
+  .col-subject {
+    font-size: 16px;
+    font-weight: 600;
+    color: #111827;
+  }
+
+  .col-subject::before {
+    content: "Subject";
+  }
+
+  /* BRANCH */
+  .col-branch {
+    color: #4b5563;
+  }
+
+  /* DOWNLOAD BUTTON */
+  .col-download::before {
+    content: "";
+  }
+
+  .download-btn {
+    width: 100%;
+    display: block;
+    text-align: center;
+    padding: 10px;
+    background: #2563eb;
+    color: white;
+    border-radius: 8px;
+    margin-top: 10px;
+  }
+}
+/* ================================================= */
+/* =============== THEME LAYER ONLY ================ */
+/* ================================================= */
+
+/* Page background */
+body {
+  background:
+    radial-gradient(circle at top left, #eef2ff 0%, transparent 40%),
+    radial-gradient(circle at bottom right, #e0e7ff 0%, transparent 40%),
+    linear-gradient(180deg, #f8fafc 0%, #eef2ff 100%);
+}
+
+/* Main container glow */
+.container {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+}
+
+/* Header accent */
+.uni-header {
+  position: relative;
+  overflow: hidden;
+}
+
+.uni-header::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(circle at top right, rgba(255,255,255,0.25), transparent 45%);
+  pointer-events: none;
+}
+
+/* Section title emphasis */
+h2 {
+  position: relative;
+}
+
+h2::after {
+  content: "";
+  display: block;
+  width: 60px;
+  height: 4px;
+  margin: 8px auto 0;
+  border-radius: 4px;
+  background: linear-gradient(90deg, #6366f1, #3b82f6);
+}
+
+/* Filter area feel */
+.search-form select {
+  background-color: #f9fafb;
+}
+
+/* Table / card soft contrast */
+tbody tr {
+  background-color: #ffffff;
+}
+
+/* Backside background */
+body {
+  background-color: #f1f5f9; /* light slate grey */
+}
+body {
+  background-color: #eef2ff; /* soft blue */
+}
+body {
+  background: linear-gradient(
+    180deg,
+    #f8fafc 0%,
+    #eef2ff 100%
+  );
+}
+/* === Input & Card Backside Color === */
+
+/* Dropdowns / inputs */
+.search-form select {
+  background: linear-gradient(
+    180deg,
+    #f9fafb 0%,
+    #f1f5f9 100%
+  );
+}
+
+/* Mobile cards (table rows) */
+@media (max-width: 768px) {
+  tr {
+    background: linear-gradient(
+      180deg,
+      #ffffff 0%,
+      #f1f5f9 100%
+    );
+  }
+}
+/* === Primary Button Style === */
+button,
+.download-btn {
+  background: linear-gradient(
+    135deg,
+    #4f46e5 0%,
+    #6366f1 50%,
+    #3b82f6 100%
+  );
+  color: #ffffff !important;
+  box-shadow: 0 8px 18px rgba(79,70,229,0.35);
+}
+
+/* Hover effect */
+button:hover,
+.download-btn:hover {
+  background: linear-gradient(
+    135deg,
+    #4338ca 0%,
+    #4f46e5 50%,
+    #2563eb 100%
+  );
 }

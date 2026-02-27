@@ -1,14 +1,21 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
+  <meta charset="UTF-8">
   <title>Previous Year Question Papers</title>
+
+  <!-- IMPORTANT -->
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
   <link rel="icon" type="image/png" href="/logo.png">
-  <link rel="stylesheet" href="/css/style.css">
+  <link rel="stylesheet" href="/css/style.css?v=3">
 </head>
+
 <body>
 
 <div class="container">
+
+  <!-- HEADER -->
   <div class="uni-header">
     <h1>Savitribai Phule Pune University</h1>
     <p>
@@ -22,7 +29,6 @@
   <!-- SEARCH FORM -->
   <form method="GET" action="/" class="search-form">
 
-    <!-- Branch -->
     <select name="branch" id="branch" required>
       <option value="">Branch</option>
       <option value="IT" <%= filters?.branch === "IT" ? "selected" : "" %>>IT</option>
@@ -31,7 +37,6 @@
       <option value="Mechanical" <%= filters?.branch === "Mechanical" ? "selected" : "" %>>Mechanical</option>
     </select>
 
-    <!-- Academic Year -->
     <select name="academicYear">
       <option value="">Year</option>
       <option value="FE" <%= filters?.academicYear === "FE" ? "selected" : "" %>>FE</option>
@@ -40,14 +45,12 @@
       <option value="BE" <%= filters?.academicYear === "BE" ? "selected" : "" %>>BE</option>
     </select>
 
-    <!-- Semester -->
     <select name="semester" required>
       <option value="">Semester</option>
       <option value="1" <%= filters?.semester == 1 ? "selected" : "" %>>Semester 1</option>
       <option value="2" <%= filters?.semester == 2 ? "selected" : "" %>>Semester 2</option>
     </select>
 
-    <!-- Subject -->
     <select name="subject" id="subject">
       <option value="">Subject</option>
     </select>
@@ -66,8 +69,7 @@
           <th>Subject</th>
           <th>Year</th>
           <th>Download</th>
-
-          <% if (typeof isAdmin !== "undefined" && isAdmin) { %>
+          <% if (isAdmin) { %>
             <th>Delete</th>
           <% } %>
         </tr>
@@ -76,7 +78,7 @@
       <tbody>
         <% if (papers.length === 0) { %>
           <tr>
-            <td colspan="<%= (typeof isAdmin !== 'undefined' && isAdmin) ? 7 : 6 %>" class="empty">
+            <td colspan="<%= isAdmin ? 7 : 6 %>" class="empty">
               No papers found
             </td>
           </tr>
@@ -84,17 +86,18 @@
 
         <% papers.forEach(paper => { %>
           <tr>
-            <td><%= paper.course %></td>
-            <td><%= paper.branch %></td>
-            <td><%= paper.semester %></td>
-            <td><%= paper.subject %></td>
-            <td><%= paper.year %></td>
-            <td>
+            <td class="col-course" data-label="Course"><%= paper.course %></td>
+            <td class="col-branch" data-label="Branch"><%= paper.branch %></td>
+            <td class="col-semester" data-label="Semester"><%= paper.semester %></td>
+            <td class="col-subject" data-label="Subject"><%= paper.subject %></td>
+            <td class="col-year" data-label="Year"><%= paper.year %></td>
+
+            <td class="col-download" data-label="Download">
               <a href="/download/<%= paper._id %>" class="download-btn">Download</a>
             </td>
 
-            <% if (typeof isAdmin !== "undefined" && isAdmin) { %>
-              <td>
+            <% if (isAdmin) { %>
+              <td class="col-action" data-label="Action">
                 <form action="/admin/delete/<%= paper._id %>" method="POST">
                   <button type="submit" class="delete-btn">Delete</button>
                 </form>
@@ -109,62 +112,57 @@
 
 <!-- SUBJECT SCRIPT -->
 <script>
-  const branchSubjects = {
-    IT: [
-      "Computer and Network Security",
-      "Data Science and Big Data Analytics",
-      "Web Application Development",
-      "Cloud Computing",
-      "Artificial Intelligence"
-    ],
-    CS: [
-      "DATA SCIENCE AND BIG DATA ANALYSIS",
-      "WEB TECHNOLOGY",
-      "ARTIFICIAL INTELLIGENCE",
-      "CLOUD COMPUTING",
-      "Machine Learning"
-    ],
-    ENTC: [
-      "CELLULAR NETWORKS (CN)",
-      "PROJECT MANAGEMENT (PM)",
-      "POWER DEVICES AND CIRCUITS (PD & C)",
-      "EMBEDDED PROCESSORS (EP)",
-      "NETWORK SECURITY (NS)"
-    ],
-    Mechanical: [
-      "Thermodynamics",
-      "Fluid Mechanics",
-      "Machine Design",
-      "Heat Transfer"
-    ]
-  };
+const branchSubjects = {
+  IT: [
+    "Computer and Network Security",
+    "Data Science and Big Data Analytics",
+    "Web Application Development",
+    "Cloud Computing",
+    "Artificial Intelligence"
+  ],
+  CS: [
+    "DATA SCIENCE AND BIG DATA ANALYSIS",
+    "WEB TECHNOLOGY",
+    "ARTIFICIAL INTELLIGENCE",
+    "CLOUD COMPUTING",
+    "Machine Learning"
+  ],
+  ENTC: [
+    "CELLULAR NETWORKS (CN)",
+    "PROJECT MANAGEMENT (PM)",
+    "POWER DEVICES AND CIRCUITS (PD & C)",
+    "EMBEDDED PROCESSORS (EP)",
+    "NETWORK SECURITY (NS)"
+  ],
+  Mechanical: [
+    "Thermodynamics",
+    "Fluid Mechanics",
+    "Machine Design",
+    "Heat Transfer"
+  ]
+};
 
-  const branchSelect = document.getElementById("branch");
-  const subjectSelect = document.getElementById("subject");
-  const selectedSubject = "<%= filters?.subject || "" %>";
+const branchSelect = document.getElementById("branch");
+const subjectSelect = document.getElementById("subject");
+const selectedSubject = "<%= filters?.subject || "" %>";
 
-  function loadSubjects(branch) {
-    subjectSelect.innerHTML = '<option value="">Subject</option>';
-    if (!branchSubjects[branch]) return;
+function loadSubjects(branch) {
+  subjectSelect.innerHTML = '<option value="">Subject</option>';
+  if (!branchSubjects[branch]) return;
 
-    branchSubjects[branch].forEach(sub => {
-      const opt = document.createElement("option");
-      opt.value = sub;
-      opt.textContent = sub;
-      if (selectedSubject && sub.toLowerCase() === selectedSubject.toLowerCase()) {
-        opt.selected = true;
-      }
-      subjectSelect.appendChild(opt);
-    });
-  }
-
-  branchSelect.addEventListener("change", () => {
-    loadSubjects(branchSelect.value);
+  branchSubjects[branch].forEach(sub => {
+    const opt = document.createElement("option");
+    opt.value = sub;
+    opt.textContent = sub;
+    if (selectedSubject && sub.toLowerCase() === selectedSubject.toLowerCase()) {
+      opt.selected = true;
+    }
+    subjectSelect.appendChild(opt);
   });
+}
 
-  if (branchSelect.value) {
-    loadSubjects(branchSelect.value);
-  }
+branchSelect.addEventListener("change", () => loadSubjects(branchSelect.value));
+if (branchSelect.value) loadSubjects(branchSelect.value);
 </script>
 
 </body>
