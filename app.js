@@ -1,21 +1,31 @@
-require("dotenv").config(); // MUST be first
+// ================= ENV (must be first) =================
+require("dotenv").config();
 
+// ================= IMPORTS =================
 const express = require("express");
 const mongoose = require("mongoose");
 const path = require("path");
 
+// ================= APP INIT =================
 const app = express();
 
-/* ================= MIDDLEWARE ================= */
+// ================= MIDDLEWARE =================
 app.use(express.urlencoded({ extended: true }));
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "public")));
 
-/* ================= VIEW ENGINE ================= */
+// ================= VIEW ENGINE =================
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
-/* ================= NOTES ROUTE (FIX) ================= */
+// ================= ROUTES =================
+
+// Health check (important for Railway debugging)
+app.get("/health", (req, res) => {
+  res.status(200).send("OK");
+});
+
+// Notes route
 app.get("/notes", (req, res) => {
   res.render("notes", {
     notes: [],
@@ -23,24 +33,32 @@ app.get("/notes", (req, res) => {
   });
 });
 
-/* ================= OTHER ROUTES ================= */
+// Other routes
 app.use("/admin", require("./routes/adminRoutes"));
 app.use("/", require("./routes/paperRoutes"));
 
-/* ================= MONGODB + SERVER ================= */
+// ================= SERVER =================
 const PORT = process.env.PORT || 3000;
 
-mongoose.connect(process.env.MONGO_URI, {
-  serverSelectionTimeoutMS: 10000,
-})
-.then(() => {
-  console.log("✅ MongoDB Connected");
+// 🚀 START SERVER FIRST (CRITICAL FOR RAILWAY)
+app.listen(PORT, "0.0.0.0", () => {
+  console.log(`🚀 Server running on port ${PORT}`);
+});
 
-  app.listen(PORT, () => {
-    console.log(`🚀 Server running on port ${PORT}`);
+// ================= DATABASE =================
+mongoose
+  .connect(process.env.MONGO_URI, {
+    serverSelectionTimeoutMS: 10000,
+  })
+  .then(() => {
+    console.log("✅ MongoDB Connected");
+  })
+  .catch((err) => {
+    console.error("❌ MongoDB connection failed");
+    console.error(err.message);
   });
-})
-.catch(err => {
-  console.error("❌ MongoDB connection failed");
-  console.error(err);
+
+// ================= SAFETY =================
+process.on("unhandledRejection", (err) => {
+  console.error("Unhandled Promise Rejection:", err);
 });
