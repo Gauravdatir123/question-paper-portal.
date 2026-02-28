@@ -24,7 +24,9 @@ app.set("views", path.join(__dirname, "views"));
 app.get("/health", (req, res) => {
   res.status(200).send("OK");
 });
-
+app.get("/about", (req, res) => {
+  res.render("about");
+});
 // Notes route
 app.get("/notes", (req, res) => {
   res.render("notes", {
