@@ -651,3 +651,80 @@ body {
     align-self: flex-start;
   }
 }
+/* ================= MOBILE MENU ================= */
+
+/* Hamburger icon */
+.hamburger {
+  display: none;
+  font-size: 26px;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+/* Sidebar menu */
+.mobile-menu {
+  position: fixed;
+  top: 0;
+  right: -100%;
+  width: 70%;
+  height: 100vh;
+  background: linear-gradient(
+    180deg,
+    #1e3a8a 0%,
+    #2563eb 60%,
+    #3b82f6 100%
+  );
+  display: flex;
+  flex-direction: column;
+  padding-top: 80px;
+  transition: right 0.3s ease;
+  z-index: 2000;
+}
+
+/* Sidebar links */
+.mobile-menu a {
+  color: #ffffff;
+  text-decoration: none;
+  padding: 16px 24px;
+  font-size: 18px;
+  border-bottom: 1px solid rgba(255,255,255,0.2);
+}
+
+/* Active state */
+.mobile-menu.active {
+  right: 0;
+}
+
+/* ===== MOBILE RULES ===== */
+@media (max-width: 768px) {
+
+  .nav-center {
+    display: none; /* already present but keeping safe */
+  }
+
+  .hamburger {
+    display: block;
+  }
+}
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+.hamburger {
+  display: none;
+  font-size: 26px;
+  color: #ffffff;
+  cursor: pointer;
+  line-height: 1;
+}
+@media (max-width: 768px) {
+
+  .nav-center {
+    display: none;
+  }
+
+  .hamburger {
+    display: block;
+  }
+}

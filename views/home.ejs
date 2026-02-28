@@ -13,28 +13,47 @@
 </head>
 
 <body>
+  <!-- Hamburger (mobile only) -->
   <!-- ===== TOP NAVBAR ===== -->
 <nav class="top-navbar">
   <div class="nav-left">
-  <img src="/logo.png" alt="SPPU Logo" class="nav-logo-img">
-  <div class="nav-text">
-    <span class="nav-title">SPPU</span>
-    <span class="nav-subtitle">Study Material</span>
+    <img src="/logo.png" alt="SPPU Logo" class="nav-logo-img">
+    <div class="nav-text">
+      <span class="nav-title">SPPU</span>
+      <span class="nav-subtitle">Study Material</span>
+    </div>
   </div>
-</div>
 
   <div class="nav-center">
     <a href="/">Home</a>
     <a href="/notes">Notes</a>
     <a href="/about">About</a>
-    <a href="">Contact</a>
+    <a href="/">Question Papers</a>
   </div>
 
   <div class="nav-right">
-    <a href="" class="nav-btn">User</a>
+     <a href="" class="nav-btn">User</a>
+    <!-- Hamburger icon (mobile) -->
+    <div class="hamburger" onclick="toggleMobileMenu()">☰</div>
+
+    <!-- User button -->
   </div>
 </nav>
 
+<!-- MOBILE SIDEBAR -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="/" onclick="toggleMobileMenu()">Home</a>
+  <a href="/notes" onclick="toggleMobileMenu()">Notes</a>
+  <a href="/about" onclick="toggleMobileMenu()">About</a>
+  <a href="/contact" onclick="toggleMobileMenu()">Contact</a>
+</div>
+<!-- ===== MOBILE SIDEBAR MENU ===== -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="/" onclick="toggleMobileMenu()">Home</a>
+  <a href="/notes" onclick="toggleMobileMenu()">Notes</a>
+  <a href="/about" onclick="toggleMobileMenu()">About</a>
+  <a href="/contact" onclick="toggleMobileMenu()">Contact</a>
+</div>
 <div class="container">
 
   <!-- HEADER -->
@@ -190,6 +209,10 @@ function loadSubjects(branch) {
 branchSelect.addEventListener("change", () => loadSubjects(branchSelect.value));
 if (branchSelect.value) loadSubjects(branchSelect.value);
 </script>
-
+<script>
+  function toggleMobileMenu() {
+    document.getElementById("mobileMenu").classList.toggle("active");
+  }
+</script>
 </body>
 </html>
