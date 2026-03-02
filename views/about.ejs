@@ -5,10 +5,51 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>About | SPPU Question Paper Portal</title>
   <link rel="stylesheet" href="/css/style2.css" />
+  <link rel="stylesheet" href="/css/style.css?v=999999">
+
   <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
 </head>
 <body>
+<nav class="top-navbar">
+  <div class="nav-left">
+    <img src="/logo.png" alt="SPPU Logo" class="nav-logo-img">
+    <div class="nav-text">
+      <span class="nav-title">SPPU</span>
+      <span class="nav-subtitle">Study Material</span>
+    </div>
+  </div>
 
+  <div class="nav-center">
+    <a href="/">Home</a>
+    <a href="/notes">Notes</a>
+    
+    <a href="/">Question Papers</a>
+    <a href="/">About</a>
+  </div>
+
+  <div class="nav-right">
+     <a href="" class="nav-btn">User</a>
+    <!-- Hamburger icon (mobile) -->
+    <div class="hamburger" onclick="toggleMobileMenu()">☰</div>
+
+    <!-- User button -->
+  </div>
+</nav>
+
+<!-- MOBILE SIDEBAR -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="/" onclick="toggleMobileMenu()">Home</a>
+  <a href="/notes" onclick="toggleMobileMenu()">Notes</a>
+  <a href="/" onclick="toggleMobileMenu()">About</a>
+  <a href="/" onclick="toggleMobileMenu()">Question Papers</a>
+</div>
+<!-- ===== MOBILE SIDEBAR MENU ===== -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="/" onclick="toggleMobileMenu()">Home</a>
+  <a href="/notes" onclick="toggleMobileMenu()">Notes</a>
+  <a href="/about" onclick="toggleMobileMenu()">About</a>
+  <a href="/contact" onclick="toggleMobileMenu()">Contact</a>
+</div>
 <div class="about-wrapper">
 
   <!-- Hero Banner -->
@@ -110,6 +151,10 @@
   </div>
 
 </div>
-
+<script>
+  function toggleMobileMenu() {
+    document.getElementById("mobileMenu").classList.toggle("active");
+  }
+</script>
 </body>
 </html>

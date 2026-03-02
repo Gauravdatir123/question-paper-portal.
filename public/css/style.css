@@ -728,3 +728,179 @@ body {
     display: block;
   }
 }
+.page-title {
+  text-align: center;
+}
+
+/* underline */
+.page-title::after {
+  content: "";
+  display: block;
+  width: 220px;           /* desktop width */
+  height: 5px;
+  margin: 12px auto 0;
+  border-radius: 6px;
+  background: linear-gradient(90deg, #4f46e5, #3b82f6);
+}
+@media (max-width: 768px) {
+  .page-title::after {
+    width: 90%;          /* almost full width on mobile */
+    height: 5px;
+  }
+}
+.page-title-row {
+  display: flex;
+  flex-direction: column;   /* stack vertically */
+  align-items: center;
+  gap: 14px;
+  margin: 24px 0;
+}
+/* ===== MIDDLE DIVIDER LINE ===== */
+.middle-divider {
+  width: 220px;              /* desktop width */
+  height: 5px;
+  border-radius: 6px;
+  background: linear-gradient(
+    90deg,
+    #4f46e5,
+    #3b82f6
+  );
+  margin: 10px auto;         /* space above & below */
+}
+@media (max-width: 768px) {
+  .middle-divider {
+    width: 90%;              /* almost full width */
+    height: 5px;
+  }
+}
+/* ========================================= */
+/* ===== TITLE + DOWNLOAD RESPONSIVE ======= */
+/* ========================================= */
+
+/* Mobile-first (STACKED) */
+.page-title-row {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  margin: 32px 0;
+}
+
+.page-title {
+  font-size: 26px;
+  font-weight: 600;
+  text-align: center;
+  color: #000000;
+}
+
+/* Horizontal divider (mobile) */
+.middle-divider {
+  width: 90%;
+  height: 5px;
+  border-radius: 6px;
+  background: linear-gradient(90deg, #4f46e5, #3b82f6);
+}
+
+/* ================= DESKTOP ================= */
+@media (min-width: 992px) {
+
+  .page-title-row {
+    flex-direction: row;
+    justify-content: center;
+    gap: 26px;
+  }
+
+  .page-title {
+    white-space: nowrap;
+    margin: 0;
+  }
+
+  /* Vertical divider */
+  .middle-divider {
+    width: 4px;
+    height: 36px;
+    background: linear-gradient(
+      180deg,
+      #4f46e5,
+      #3b82f6
+    );
+  }
+}
+/* ========================================= */
+/* ===== MOBILE FONT & SPACING POLISH ===== */
+/* ========================================= */
+
+@media (max-width: 768px) {
+
+  /* University header */
+  .uni-header h1 {
+    font-size: 22px;
+    line-height: 1.25;
+  }
+
+  .uni-header p {
+    font-size: 13px;
+    line-height: 1.4;
+  }
+
+  /* Page main title */
+  .page-title {
+    font-size: 22px;
+    line-height: 1.3;
+  }
+
+  /* Section divider spacing */
+  .middle-divider {
+    height: 4px;
+  }
+
+  /* Download notes button */
+  .note-btn {
+    font-size: 13px;
+    padding: 9px 18px;
+  }
+
+  /* Search form */
+  .search-form select,
+  .search-form button {
+    font-size: 13px;
+  }
+
+  /* ===== MOBILE CARD (TABLE → CARD) ===== */
+
+  tr {
+    padding: 16px;
+  }
+
+  td {
+    font-size: 13px;
+  }
+
+  td::before {
+    font-size: 12px;
+    font-weight: 500;
+    color: #475569;
+  }
+
+  /* Subject text highlight */
+  .col-subject {
+    font-size: 15px;
+    font-weight: 600;
+    line-height: 1.35;
+    color: #0f172a;
+  }
+
+  /* Branch value (ENTC / IT) */
+  .col-branch {
+    font-size: 13px;
+    font-weight: 500;
+    color: #334155;
+  }
+
+  /* Download button inside card */
+  .download-btn {
+    font-size: 14px;
+    padding: 11px;
+    border-radius: 10px;
+  }
+}
