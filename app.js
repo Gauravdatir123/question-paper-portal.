@@ -6,7 +6,6 @@ const express = require("express");
 const mongoose = require("mongoose");
 const path = require("path");
 const session = require("express-session");
-const MongoStore = require("connect-mongo");
 const { attachUser, requireAdmin } = require("./middleware/auth");
 const QuestionPaper = require("./models/QuestionPaper");
 const User = require("./models/User");
@@ -28,10 +27,6 @@ app.use(session({
   secret: process.env.SESSION_SECRET || "sppu_secret_change_this",
   resave: false,
   saveUninitialized: false,
-  store: MongoStore.create({
-    mongoUrl: process.env.MONGO_URI,
-    ttl: 60 * 60 * 24 * 7
-  }),
   cookie: { maxAge: 1000 * 60 * 60 * 24 * 7 }
 }));
 
