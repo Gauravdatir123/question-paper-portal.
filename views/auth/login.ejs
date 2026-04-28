@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Login – SPPU</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="/logo.png">
+  <link rel="stylesheet" href="/css/style.css?v=999999">
+</head>
+<body>
+
+<!-- ===== TOP NAVBAR ===== -->
+<nav class="top-navbar">
+  <div class="nav-left">
+    <img src="/logo.png" alt="SPPU Logo" class="nav-logo-img">
+    <div class="nav-text">
+      <span class="nav-title">SPPU</span>
+      <span class="nav-subtitle">Study Material</span>
+    </div>
+  </div>
+
+  <div class="nav-center">
+    <a href="/">Home</a>
+    <a href="/notes">Notes</a>
+    <a href="/">Question Papers</a>
+    <a href="/about">About</a>
+  </div>
+
+  <div class="nav-right">
+    <a href="/login" class="nav-btn">Login</a>
+    <div class="hamburger" onclick="toggleMobileMenu()">☰</div>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="/" onclick="toggleMobileMenu()">Home</a>
+  <a href="/notes" onclick="toggleMobileMenu()">Notes</a>
+  <a href="/about" onclick="toggleMobileMenu()">About</a>
+  <a href="/login" onclick="toggleMobileMenu()">Login</a>
+</div>
+
+<div class="container">
+  <div class="uni-header">
+    <h1>Savitribai Phule Pune University</h1>
+    <p>Sign in to your account</p>
+  </div>
+
+  <div class="auth-card">
+    <h2>Login</h2>
+
+    <% if (error) { %>
+      <div class="alert-error"><%= error %></div>
+    <% } %>
+
+    <form method="POST" action="/login" class="auth-form">
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" name="email" required placeholder="you@example.com">
+      </div>
+
+      <div class="form-group">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" required placeholder="••••••••">
+      </div>
+
+      <button type="submit" class="btn-primary">Sign In</button>
+    </form>
+
+    <p class="auth-link">Don't have an account? <a href="/register">Register</a></p>
+  </div>
+</div>
+
+<script>
+  function toggleMobileMenu() {
+    document.getElementById("mobileMenu").classList.toggle("active");
+  }
+</script>
+
+</body>
+</html>

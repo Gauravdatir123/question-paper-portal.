@@ -8,26 +8,53 @@
 
 <div class="container small">
 
-  <h2>Upload Question Paper</h2>
+  <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:20px;">
+    <h2>Upload Question Paper</h2>
+    <a href="/admin/papers" style="
+      background:#4f46e5;
+      color:white;
+      padding:10px 20px;
+      border-radius:8px;
+      text-decoration:none;
+      font-weight:600;
+    ">← Admin Panel</a>
+  </div>
 
   <form action="/admin/upload" method="POST" enctype="multipart/form-data" class="upload-form">
 
     <input type="text" name="university" placeholder="University" required>
-    <input type="text" name="course" placeholder="Course" required>
+    <input type="text" name="course" placeholder="Course (e.g. B E)" required>
+
+    <!-- Academic Year (FE/SE/TE/BE) -->
+    <select name="academicYear" required>
+      <option value="">Select Academic Year</option>
+      <option value="FE">FE (First Year)</option>
+      <option value="SE">SE (Second Year)</option>
+      <option value="TE">TE (Third Year)</option>
+      <option value="BE">BE (Final Year)</option>
+    </select>
 
     <select name="branch" required>
-  <option value="">Select Branch</option>
-  <option value="IT">IT</option>
-  <option value="CS">Computer Science</option>
-  <option value="ENTC">ENTC</option>
-  <option value="Mechanical">Mechanical</option>
-</select>
+      <option value="">Select Branch</option>
+      <option value="IT">IT</option>
+      <option value="CS">Computer Science</option>
+      <option value="ENTC">ENTC</option>
+      <option value="Mechanical">Mechanical</option>
+    </select>
 
-    <input type="number" name="semester" placeholder="Semester" required>
+    <input type="number" name="semester" placeholder="Semester (e.g. 1 or 2)" required>
     <input type="text" name="subject" placeholder="Subject" required>
-    <input type="number" name="year" placeholder="Year" required>
 
-    <input type="file" name="pdf" required>
+    <!-- Paper Year (e.g. 2025) -->
+    <input type="number" name="year" placeholder="Paper Year (e.g. 2025)" required>
+
+    <select name="examType" required>
+      <option value="">Select Exam Type</option>
+      <option value="insem">Insem Paper</option>
+      <option value="endsem">Endsem Paper</option>
+    </select>
+
+    <input type="file" name="pdf" accept="application/pdf" required>
 
     <button type="submit">Upload</button>
   </form>

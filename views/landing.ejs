@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>SPPU Study Material – Previous Year Question Papers</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="icon" type="image/png" href="/logo.png">
+  <link rel="stylesheet" href="/css/style.css?v=999999">
+  <link rel="stylesheet" href="/css/landing.css?v=999999">
+</head>
+<body class="landing-body">
+
+<!-- ===== NAVBAR ===== -->
+<nav class="top-navbar">
+  <div class="nav-left">
+    <img src="/logo.png" alt="SPPU Logo" class="nav-logo-img">
+    <div class="nav-text">
+      <span class="nav-title">SPPU</span>
+      <span class="nav-subtitle">Study Material</span>
+    </div>
+  </div>
+
+  <div class="nav-center">
+    <a href="/">Home</a>
+    <a href="/papers">Question Papers</a>
+    <a href="/notes">Notes</a>
+    <a href="/about">About</a>
+  </div>
+
+  <div class="nav-right">
+    <% if (currentUser) { %>
+      <span class="nav-user-name">👤 <%= currentUser.name %></span>
+      <a href="/logout" class="nav-btn">Logout</a>
+    <% } else { %>
+      <a href="/login" class="nav-btn">Login</a>
+    <% } %>
+    <div class="hamburger" onclick="toggleMobileMenu()">☰</div>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="/" onclick="toggleMobileMenu()">Home</a>
+  <a href="/papers" onclick="toggleMobileMenu()">Question Papers</a>
+  <a href="/notes" onclick="toggleMobileMenu()">Notes</a>
+  <a href="/about" onclick="toggleMobileMenu()">About</a>
+  <% if (currentUser) { %>
+    <a href="/logout" onclick="toggleMobileMenu()">Logout</a>
+  <% } else { %>
+    <a href="/login" onclick="toggleMobileMenu()">Login</a>
+  <% } %>
+</div>
+
+<!-- ===== HERO SECTION ===== -->
+<section class="hero">
+  <div class="hero-bg">
+    <div class="hero-circle c1"></div>
+    <div class="hero-circle c2"></div>
+    <div class="hero-circle c3"></div>
+  </div>
+
+  <div class="hero-content">
+    <div class="hero-badge">🎓 Savitribai Phule Pune University</div>
+    <h1 class="hero-title">
+      Your Complete<br>
+      <span class="hero-highlight">Study Material</span><br>
+      Hub
+    </h1>
+    <p class="hero-subtitle">
+      Access previous year question papers for all branches.<br>
+      Insem & Endsem papers — all in one place.
+    </p>
+
+    <div class="hero-buttons">
+      <a href="/papers" class="hero-btn-primary">
+        📄 Browse Papers
+      </a>
+      <a href="/notes" class="hero-btn-secondary">
+        📚 Download Notes
+      </a>
+    </div>
+  </div>
+
+  <div class="hero-image">
+    <div class="hero-card-float">
+      <div class="float-card fc1">
+        <span class="fc-icon">📝</span>
+        <span class="fc-text">Insem Papers</span>
+      </div>
+      <div class="float-card fc2">
+        <span class="fc-icon">📄</span>
+        <span class="fc-text">Endsem Papers</span>
+      </div>
+      <div class="float-card fc3">
+        <span class="fc-icon">📚</span>
+        <span class="fc-text">Notes</span>
+      </div>
+      <div class="hero-circle-main">
+        <img src="/logo.png" alt="SPPU" class="hero-logo-big">
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== STATS SECTION ===== -->
+<section class="stats-section">
+  <div class="stats-container">
+    <div class="stat-card">
+      <div class="stat-icon">📄</div>
+      <div class="stat-number"><%= totalPapers %>+</div>
+      <div class="stat-label">Question Papers</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon">🏫</div>
+      <div class="stat-number">4</div>
+      <div class="stat-label">Branches</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon">📅</div>
+      <div class="stat-number">3+</div>
+      <div class="stat-label">Years Covered</div>
+    </div>
+    <div class="stat-card">
+      <div class="stat-icon">👥</div>
+      <div class="stat-number"><%= totalUsers %>+</div>
+      <div class="stat-label">Students</div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== BRANCHES SECTION ===== -->
+<section class="branches-section">
+  <div class="section-container">
+    <div class="section-label">Browse by Branch</div>
+    <h2 class="section-title">Find Your Branch Papers</h2>
+    <p class="section-sub">Select your branch to find all available question papers</p>
+
+    <div class="branches-grid">
+
+      <a href="/papers?branch=IT" class="branch-card">
+        <div class="branch-icon" style="background: linear-gradient(135deg, #4f46e5, #6366f1)">💻</div>
+        <h3>Information Technology</h3>
+        <p>Web Dev, Cloud, AI, Networks & more</p>
+        <span class="branch-arrow">→</span>
+      </a>
+
+      <a href="/papers?branch=CS" class="branch-card">
+        <div class="branch-icon" style="background: linear-gradient(135deg, #0891b2, #06b6d4)">🖥️</div>
+        <h3>Computer Science</h3>
+        <p>ML, AI, Web Tech, Data Science & more</p>
+        <span class="branch-arrow">→</span>
+      </a>
+
+      <a href="/papers?branch=ENTC" class="branch-card">
+        <div class="branch-icon" style="background: linear-gradient(135deg, #d97706, #f59e0b)">📡</div>
+        <h3>ENTC</h3>
+        <p>Networks, Embedded, Power Devices & more</p>
+        <span class="branch-arrow">→</span>
+      </a>
+
+      <a href="/papers?branch=Mechanical" class="branch-card">
+        <div class="branch-icon" style="background: linear-gradient(135deg, #dc2626, #ef4444)">⚙️</div>
+        <h3>Mechanical</h3>
+        <p>CAE, Design, Materials, AI/ML & more</p>
+        <span class="branch-arrow">→</span>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- ===== HOW IT WORKS ===== -->
+<section class="how-section">
+  <div class="section-container">
+    <div class="section-label">Simple Process</div>
+    <h2 class="section-title">How It Works</h2>
+
+    <div class="steps-grid">
+      <div class="step-card">
+        <div class="step-number">1</div>
+        <div class="step-icon">🔍</div>
+        <h3>Select Filters</h3>
+        <p>Choose your branch, year, semester and subject</p>
+      </div>
+      <div class="step-arrow">→</div>
+      <div class="step-card">
+        <div class="step-number">2</div>
+        <div class="step-icon">📋</div>
+        <h3>View Papers</h3>
+        <p>See insem and endsem papers separately</p>
+      </div>
+      <div class="step-arrow">→</div>
+      <div class="step-card">
+        <div class="step-number">3</div>
+        <div class="step-icon">⬇️</div>
+        <h3>Download</h3>
+        <p>Download your paper as PDF instantly</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ===== CTA SECTION ===== -->
+<section class="cta-section">
+  <div class="cta-content">
+    <h2>Ready to Start Studying?</h2>
+    <p>Access all previous year papers for free</p>
+    <a href="/papers" class="hero-btn-primary">Browse All Papers →</a>
+  </div>
+</section>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer">
+  <div class="footer-content">
+    <div class="footer-left">
+      <div class="footer-logo">
+        <img src="/logo.png" alt="SPPU" height="36">
+        <span>SPPU Study Material</span>
+      </div>
+      <p>Previous Year Question Paper Portal<br>Faculty of Engineering</p>
+    </div>
+    <div class="footer-links">
+      <a href="/">Home</a>
+      <a href="/papers">Papers</a>
+      <a href="/notes">Notes</a>
+      <a href="/about">About</a>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <p>© 2025 SPPU Study Material. All rights reserved.</p>
+  </div>
+</footer>
+
+<script>
+  function toggleMobileMenu() {
+    document.getElementById("mobileMenu").classList.toggle("active");
+  }
+</script>
+
+</body>
+</html>

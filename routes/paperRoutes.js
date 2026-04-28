@@ -9,13 +9,8 @@ router.get("/", async (req, res) => {
   try {
     let filter = {};
 
-    if (req.query.branch) {
-      filter.branch = req.query.branch;
-    }
-
-    if (req.query.semester) {
-      filter.semester = Number(req.query.semester);
-    }
+    if (req.query.branch) filter.branch = req.query.branch;
+    if (req.query.semester) filter.semester = Number(req.query.semester);
 
     if (req.query.subject && req.query.subject.trim() !== "") {
       const subject = req.query.subject.trim();
@@ -25,11 +20,21 @@ router.get("/", async (req, res) => {
       };
     }
 
-    const papers = await QuestionPaper.find(filter).sort({ year: -1 });
+    const allPapers = await QuestionPaper.find(filter).sort({ year: -1 });
+
+    // Split into insem and endsem
+    const insemPapers = allPapers.filter(p => p.examType === "insem");
+    const endsemPapers = allPapers.filter(p => p.examType === "endsem");
+
+    // Check if user searched
+    const searched = Object.keys(req.query).some(k => req.query[k] !== "");
 
     res.render("home", {
-      papers,
-      isAdmin: false,
+      papers: allPapers,
+      insemPapers,
+      endsemPapers,
+      searched,
+      isAdmin: req.session.userRole === "admin",
       filters: req.query
     });
   } catch (err) {
@@ -38,7 +43,7 @@ router.get("/", async (req, res) => {
   }
 });
 
-// ================= DOWNLOAD (FINAL & CORRECT) =================
+// ================= DOWNLOAD =================
 router.get("/download/:id", async (req, res) => {
   try {
     const paper = await QuestionPaper.findById(req.params.id);
@@ -47,23 +52,17 @@ router.get("/download/:id", async (req, res) => {
       return res.status(404).send("File not found");
     }
 
-    // Fetch PDF from Cloudinary
     const response = await axios.get(paper.pdfUrl, {
       responseType: "arraybuffer"
     });
 
-    // Tell browser this is a PDF file
     res.setHeader("Content-Type", "application/pdf");
-
-    // Force correct filename
     res.setHeader(
       "Content-Disposition",
       `attachment; filename="${paper.filename}"`
     );
 
-    // Send file buffer
     res.send(response.data);
-
   } catch (err) {
     console.error(err);
     res.status(500).send("Download failed");
