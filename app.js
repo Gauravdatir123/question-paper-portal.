@@ -9,7 +9,6 @@ const session = require("express-session");
 const { attachUser, requireAdmin } = require("./middleware/auth");
 const QuestionPaper = require("./models/QuestionPaper");
 const User = require("./models/User");
-const Stats = require("./models/Stats");
 
 // ================= APP INIT =================
 const app = express();
@@ -46,25 +45,12 @@ app.get("/notes", (req, res) => {
 // ================= LANDING PAGE =================
 app.get("/", async (req, res) => {
   try {
-    // Increment visitor count every time page opens
-    await Stats.findOneAndUpdate(
-      { key: "visitors" },
-      { $inc: { count: 1 } },
-      { upsert: true, new: true }
-    );
-
     const totalPapers = await QuestionPaper.countDocuments();
-    const totalVisitors = await Stats.findOne({ key: "visitors" });
-
-    console.log("Papers:", totalPapers, "Visitors:", totalVisitors?.count);
-
-    res.render("landing", {
-      totalPapers,
-      totalUsers: totalVisitors ? totalVisitors.count : 0
-    });
+    const totalUsers = await User.countDocuments();
+    res.render("landing", { totalPapers, totalUsers });
   } catch (err) {
     console.error(err);
-    res.render("landing", { totalPapers: 170, totalUsers: 2 });
+    res.render("landing", { totalPapers: 0, totalUsers: 0 });
   }
 });
 
@@ -108,18 +94,20 @@ app.use("/", require("./routes/authRoutes"));
 app.use("/admin", requireAdmin, require("./routes/adminRoutes"));
 app.use("/", require("./routes/paperRoutes"));
 
-// ================= DATABASE + SERVER =================
+// ================= SERVER =================
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, "0.0.0.0", () => {
+  console.log(`Server running on port ${PORT}`);
+});
+
+// ================= DATABASE =================
 mongoose
   .connect(process.env.MONGO_URI, {
     serverSelectionTimeoutMS: 10000,
   })
   .then(() => {
     console.log("MongoDB Connected");
-
-    const PORT = process.env.PORT || 3000;
-    app.listen(PORT, "0.0.0.0", () => {
-      console.log(`Server running on port ${PORT}`);
-    });
   })
   .catch((err) => {
     console.error("MongoDB connection failed");
