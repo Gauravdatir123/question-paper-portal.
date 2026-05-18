@@ -6,8 +6,54 @@
   <title>About | SPPU Question Paper Portal</title>
   <link rel="stylesheet" href="/css/style2.css" />
   <link rel="stylesheet" href="/css/style.css?v=999999">
-
   <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    .dev-simple-section {
+      margin: 2rem auto;
+      max-width: 700px;
+      padding: 0 1rem;
+    }
+
+    .dev-simple-section h2 {
+      font-size: 1.2rem;
+      font-weight: 600;
+      margin-bottom: 1.2rem;
+      color: #333;
+    }
+
+    .dev-simple-list {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .dev-simple-item {
+      border-left: 3px solid #4f8ef7;
+      padding: 0.6rem 1rem;
+      background: #f7f9ff;
+      border-radius: 0 8px 8px 0;
+    }
+
+    .dev-simple-item h3 {
+      font-size: 1rem;
+      font-weight: 600;
+      color: #1a1a2e;
+      margin: 0 0 4px 0;
+    }
+
+    .dev-simple-item p {
+      font-size: 0.85rem;
+      color: #555;
+      margin: 0;
+    }
+
+    .dev-simple-item span {
+      font-size: 0.75rem;
+      color: #4f8ef7;
+      font-weight: 500;
+    }
+  </style>
 </head>
 <body>
 <nav class="top-navbar">
@@ -18,102 +64,59 @@
       <span class="nav-subtitle">Study Material</span>
     </div>
   </div>
-
   <div class="nav-center">
     <a href="/">Home</a>
     <a href="/notes">Notes</a>
-    
     <a href="/">Question Papers</a>
     <a href="/">About</a>
   </div>
-
   <div class="nav-right">
-     <a href="" class="nav-btn">User</a>
-    <!-- Hamburger icon (mobile) -->
+    <a href="" class="nav-btn">User</a>
     <div class="hamburger" onclick="toggleMobileMenu()">☰</div>
-
-    <!-- User button -->
   </div>
 </nav>
 
-<!-- MOBILE SIDEBAR -->
-<div class="mobile-menu" id="mobileMenu">
-  <a href="/" onclick="toggleMobileMenu()">Home</a>
-  <a href="/notes" onclick="toggleMobileMenu()">Notes</a>
-  <a href="/" onclick="toggleMobileMenu()">About</a>
-  <a href="/" onclick="toggleMobileMenu()">Question Papers</a>
-</div>
-<!-- ===== MOBILE SIDEBAR MENU ===== -->
 <div class="mobile-menu" id="mobileMenu">
   <a href="/" onclick="toggleMobileMenu()">Home</a>
   <a href="/notes" onclick="toggleMobileMenu()">Notes</a>
   <a href="/about" onclick="toggleMobileMenu()">About</a>
   <a href="/contact" onclick="toggleMobileMenu()">Contact</a>
 </div>
+
 <div class="about-wrapper">
 
-  <!-- Hero Banner -->
   <div class="about-hero">
     <div class="hero-badge">SPPU Portal</div>
     <h1 class="hero-title">About the Portal</h1>
     <p class="hero-sub">A student-built platform for organized, fast access to SPPU question papers.</p>
   </div>
 
-  <!-- Developer Cards -->
-  <section class="dev-section">
-    <h2 class="section-label">👨‍💻 Meet the Developers</h2>
-    <div class="dev-cards">
+  <!-- Developers - simple clean list -->
+  <div class="dev-simple-section">
+    <h2>👨‍💻 Meet the Developers</h2>
+    <div class="dev-simple-list">
 
-      <!-- Developer 1 -->
-      <div class="dev-card">
-        <div class="dev-avatar">
-          <img src="/images/dev1.jpg" alt="Gaurav Datir" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"/>
-          <div class="avatar-fallback">GD</div>
-        </div>
-        <div class="dev-info">
-          <h3 class="dev-name">Gaurav Datir</h3>
-          <span class="dev-role">Full Stack Developer</span>
-          <p class="dev-desc">Information Technology Student at SPPU. Built the backend, admin panel, and cloud storage integrations.</p>
-          <div class="dev-tags">
-            <span>Node.js</span>
-            <span>MongoDB</span>
-            <span>EJS</span>
-          </div>
-        </div>
+      <div class="dev-simple-item">
+        <span>Full Stack Developer</span>
+        <h3>Gaurav Datir</h3>
+        <p>IT Student at SPPU. Built the backend, admin panel, and cloud storage integrations. (Node.js · MongoDB · EJS)</p>
       </div>
 
-      <!-- Developer 2 -->
-      <div class="dev-card">
-        <div class="dev-avatar">
-          <img src="/public /dev2.jpg" alt="Friend Name" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex'"/>
-          <div class="avatar-fallback">KD</div>
-        </div>
-        <div class="dev-info">
-          <h3 class="dev-name">Kunal Dongare</h3>
-          <span class="dev-role">Full Stack Developer</span>
-          <p class="dev-desc">Computer Engineering Student at SPPU. Designed the UI, layouts, and student-facing features.</p>
-          <div class="dev-tags">
-            <span>CSS</span>
-            <span>JavaScript</span>
-            <span>UI/UX</span>
-          </div>
-        </div>
+      <div class="dev-simple-item">
+        <span>Full Stack Developer</span>
+        <h3>Kunal Dongare</h3>
+        <p>CE Student at SPPU. Designed the UI, layouts, and student-facing features. (CSS · JavaScript · UI/UX)</p>
       </div>
 
     </div>
-  </section>
+  </div>
 
-  <!-- About Content -->
   <section class="about-content">
-
     <div class="about-card">
       <div class="about-card-icon">📘</div>
       <div>
         <h3>What is this Platform?</h3>
-        <p>
-          The <strong>Question Paper Portal</strong> is designed to help students easily access previous year question papers across different branches, semesters, and subjects under
-          <strong>Savitribai Phule Pune University (SPPU)</strong>. No more searching scattered drives or outdated groups — everything is organized in one place.
-        </p>
+        <p>The <strong>Question Paper Portal</strong> is designed to help students easily access previous year question papers across different branches, semesters, and subjects under <strong>Savitribai Phule Pune University (SPPU)</strong>. No more searching scattered drives or outdated groups — everything is organized in one place.</p>
       </div>
     </div>
 
@@ -135,14 +138,9 @@
       <div class="about-card-icon">🏫</div>
       <div>
         <h3>University Focus</h3>
-        <p>
-          This portal is exclusively built for students of
-          <strong>Savitribai Phule Pune University (SPPU)</strong>, one of the largest universities in India. Whether you're in Engineering, Science, or Commerce — find your papers here.
-        </p>
+        <p>This portal is exclusively built for students of <strong>Savitribai Phule Pune University (SPPU)</strong>, one of the largest universities in India. Whether you're in Engineering, Science, or Commerce — find your papers here.</p>
       </div>
     </div>
-
-    
   </section>
 
   <div class="about-footer">
@@ -151,6 +149,7 @@
   </div>
 
 </div>
+
 <script>
   function toggleMobileMenu() {
     document.getElementById("mobileMenu").classList.toggle("active");
